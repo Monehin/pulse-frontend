@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { SharedStateProvider } from './store';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <SharedStateProvider>
+      <App />
+    </SharedStateProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

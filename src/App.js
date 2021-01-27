@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { useSharedState } from './store';
+import { getStoredAuthToken } from './utils/authToken';
+import Routes from './routes/Routes';
+import Loading from './components/Loading';
 
 function App() {
+  const [state, setState] = useSharedState();
+
+  useEffect(() => {
+    const auth = getStoredAuthToken();
+    if (auth) {
+      setState((prev) => ({
+        ...prev,
+        isAuthenticated: true,
+        user: auth.user,
+        isLoading: false,
+      }));
+    }
+  }, []);
+
+  if (state.isLoading) {
+    return (
+      <>
+        <Loading />
+      </>
+    );
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <Routes />
+      </Router>
+    </>
   );
 }
 
