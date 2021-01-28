@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Layout } from 'antd';
 import Aside from './Aside';
 import NavBar from './NavBar';
-import { Switch, Route, useRouteMatch, useParams } from 'react-router-dom';
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import Programs from './Program/Programs';
 import Cohorts from './Cohort/Cohorts';
 import Trainees from './Trainee/Trainees';
