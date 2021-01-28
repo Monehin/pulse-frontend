@@ -1,5 +1,4 @@
 import { Route, Redirect } from 'react-router-dom';
-import Loading from '../components/Loading';
 import { useSharedState } from '../store';
 
 const PrivateRoute = ({ component: Component, ...otherProps }) => {
@@ -8,16 +7,12 @@ const PrivateRoute = ({ component: Component, ...otherProps }) => {
     <Route
       {...otherProps}
       render={(props) =>
-        !state.isLoading ? (
-          state.isAuthenticated ? (
-            <Component {...props} />
-          ) : (
-            <Redirect
-              to={otherProps.redirectTo ? otherProps.redirectTo : '/login'}
-            />
-          )
+        state.isAuthenticated ? (
+          <Component {...props} />
         ) : (
-          <Loading />
+          <Redirect
+            to={otherProps.redirectTo ? otherProps.redirectTo : '/login'}
+          />
         )
       }
     />

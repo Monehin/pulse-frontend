@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSharedState } from './store';
 import { getStoredAuthToken } from './utils/authToken';
 import Routes from './routes/Routes';
-import Loading from './components/Loading';
+import { Spin } from 'antd';
 
 function App() {
   const [state, setState] = useSharedState();
@@ -19,16 +19,16 @@ function App() {
     }
   });
 
-  if (state.isLoading) {
-    return (
-      <>
-        <Loading />
-      </>
-    );
-  }
   return (
     <div style={{ width: '100%', height: '100%' }}>
-      <Routes />
+      <Spin
+        style={{ maxHeight: '100vh' }}
+        delay={200}
+        size='large'
+        spinning={state.isLoading}
+      >
+        <Routes />
+      </Spin>
     </div>
   );
 }

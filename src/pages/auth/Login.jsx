@@ -27,6 +27,10 @@ const Login = () => {
   if (sharedState.isAuthenticated) return <Redirect to='/dashboard' />;
 
   const onFinish = async (values) => {
+    setSharedState((prev) => ({
+      ...prev,
+      isLoading: true,
+    }));
     try {
       const res = await api.post('/auth/local/', {
         identifier: values.email,
@@ -38,9 +42,14 @@ const Login = () => {
         ...prev,
         user: data.user,
         isAuthenticated: true,
+        isLoading: false,
       }));
       openNotificationWithIcon('success', 'User Login Successfully');
     } catch (error) {
+      setSharedState((prev) => ({
+        ...prev,
+        isLoading: false,
+      }));
       if (error.response) {
         const errMsg = error.response.data.message[0].messages[0].message;
         message.error(errMsg);

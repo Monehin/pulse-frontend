@@ -32,6 +32,10 @@ const Register = () => {
       return;
     }
     try {
+      setSharedState((prev) => ({
+        ...prev,
+        isLoading: true,
+      }));
       const res = await api.post('auth/local/register', {
         username: values.username,
         email: values.email,
@@ -43,9 +47,14 @@ const Register = () => {
         ...prev,
         user: data.user,
         isAuthenticated: true,
+        isLoading: false,
       }));
       openNotificationWithIcon('success', 'User Login Successfully');
     } catch (error) {
+      setSharedState((prev) => ({
+        ...prev,
+        isLoading: false,
+      }));
       if (error.response) {
         const errMsg = error.response.data
           ? error.response.data.message[0].messages[0].message
