@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { useSharedState } from './store';
 import { getStoredAuthToken } from './utils/authToken';
 import Routes from './routes/Routes';
@@ -18,7 +17,7 @@ function App() {
         isLoading: false,
       }));
     }
-  }, []);
+  });
 
   if (state.isLoading) {
     return (
@@ -28,11 +27,9 @@ function App() {
     );
   }
   return (
-    <>
-      <Router>
-        <Routes />
-      </Router>
-    </>
+    <div style={{ width: '100%', height: '100%' }}>
+      <Routes />
+    </div>
   );
 }
 

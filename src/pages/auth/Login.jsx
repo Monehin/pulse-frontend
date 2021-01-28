@@ -27,7 +27,6 @@ const Login = () => {
   if (sharedState.isAuthenticated) return <Redirect to='/dashboard' />;
 
   const onFinish = async (values) => {
-    console.log('Success:', values);
     try {
       const res = await api.post('/auth/local/', {
         identifier: values.email,
@@ -52,7 +51,7 @@ const Login = () => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    // console.log('Failed:', errorInfo);
   };
 
   return (

@@ -44,12 +44,12 @@ const Register = () => {
         user: data.user,
         isAuthenticated: true,
       }));
-      console.log('user');
       openNotificationWithIcon('success', 'User Login Successfully');
     } catch (error) {
       if (error.response) {
-        console.log(error.response);
-        const errMsg = error.response.data.message[0].messages[0].message;
+        const errMsg = error.response.data
+          ? error.response.data.message[0].messages[0].message
+          : message.error('Server Error');
         message.error(errMsg);
       } else {
         message.error('Server Error');
@@ -58,7 +58,7 @@ const Register = () => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    // console.log('Failed:', errorInfo);
   };
 
   return (
