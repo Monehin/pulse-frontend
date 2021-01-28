@@ -15,7 +15,6 @@ export const storeAuthToken = (token) => {
 
 export const removeStoredAuthToken = () => {
   localStorage.removeItem('authToken');
-  window.location.reload();
 };
 
 export const getExpirationDate = (jwtToken) => {
