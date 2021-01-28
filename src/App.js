@@ -16,6 +16,11 @@ function App() {
         user: auth.user,
         isLoading: false,
       }));
+    } else {
+      setState((prev) => ({
+        ...prev,
+        isLoading: false,
+      }));
     }
   });
 

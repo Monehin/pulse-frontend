@@ -4,7 +4,7 @@ import { createContainer } from 'react-tracked';
 const initialState = {
   isAuthenticated: false,
   user: null,
-  isLoading: false,
+  isLoading: true,
 };
 
 const useMyState = () => useState(initialState);
