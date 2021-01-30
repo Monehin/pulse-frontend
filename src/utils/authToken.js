@@ -1,20 +1,20 @@
 export const getStoredAuthToken = () => {
-  const auth = JSON.parse(localStorage.getItem('authToken'));
-  if (!auth) return null;
-  const exp = getExpirationDate(auth.jwt);
-  if (isExpired(exp)) {
-    removeStoredAuthToken();
-  } else {
-    return auth;
-  }
+  return JSON.parse(window.localStorage.getItem('authToken'));
+  // if (!auth) return null;
+  // const exp = getExpirationDate(auth.jwt);
+  // if (isExpired(exp)) {
+  //   removeStoredAuthToken();
+  // } else {
+  //   return auth;
+  // }
 };
 
 export const storeAuthToken = (token) => {
-  localStorage.setItem('authToken', JSON.stringify(token));
+  window.localStorage.setItem('authToken', JSON.stringify(token));
 };
 
 export const removeStoredAuthToken = () => {
-  localStorage.removeItem('authToken');
+  window.localStorage.removeItem('authToken');
 };
 
 export const getExpirationDate = (jwtToken) => {

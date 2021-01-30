@@ -28,7 +28,7 @@ function App() {
     <div style={{ width: '100%', height: '100%' }}>
       <Spin
         style={{ maxHeight: '100vh' }}
-        delay={200}
+        delay={500}
         size='large'
         spinning={state.isLoading}
       >

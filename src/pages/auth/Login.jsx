@@ -45,16 +45,20 @@ const Login = () => {
         isLoading: false,
       }));
       openNotificationWithIcon('success', 'User Login Successfully');
+      return <Redirect to='/dashboard' />;
     } catch (error) {
       setSharedState((prev) => ({
         ...prev,
         isLoading: false,
       }));
       if (error.response) {
-        const errMsg = error.response.data.message[0].messages[0].message;
+        const errMsg =
+          error.response.data.message && error.response.data.message[0].messages
+            ? error.response.data.message[0].messages[0].message
+            : null;
         message.error(errMsg);
       } else {
-        message.error('Server Error');
+        message.error(error, 'Server Error');
       }
     }
   };

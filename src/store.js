@@ -5,6 +5,8 @@ const initialState = {
   isAuthenticated: false,
   user: null,
   isLoading: true,
+  programs: null,
+  cohorts: null,
 };
 
 const useMyState = () => useState(initialState);

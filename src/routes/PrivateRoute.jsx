@@ -8,7 +8,7 @@ const PrivateRoute = ({ component: Component, ...otherProps }) => {
       {...otherProps}
       render={(props) =>
         !state.isLoading ? (
-          state.isAuthenticated ? (
+          state.isAuthenticated && localStorage.getItem('authToken') ? (
             <Component {...props} />
           ) : (
             <Redirect
