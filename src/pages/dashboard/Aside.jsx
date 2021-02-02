@@ -3,13 +3,7 @@ import { css } from '@emotion/react';
 import React from 'react';
 import { Layout, Menu } from 'antd';
 import { Link, useRouteMatch } from 'react-router-dom';
-
-import {
-  CarryOutOutlined,
-  PartitionOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
+import DashboardRoutes from '../../routes/DashboardRoutes';
 
 const { Sider } = Layout;
 
@@ -22,18 +16,13 @@ const Aside = ({ collapsed }) => {
         <h1>PULSE</h1>
       </div>
       <Menu theme='light' mode='inline' defaultSelectedKeys={['1']}>
-        <Menu.Item key='1' icon={<PartitionOutlined />}>
-          <Link to={`${url}`}> Programs</Link>
-        </Menu.Item>
-        <Menu.Item key='2' icon={<CarryOutOutlined />}>
-          <Link to={`${url}/cohorts`}>Cohorts </Link>
-        </Menu.Item>
-        <Menu.Item key='3' icon={<TeamOutlined />}>
-          <Link to={`${url}/trainees`}> Trainees </Link>
-        </Menu.Item>
-        <Menu.Item key='4' icon={<UserOutlined />}>
-          <Link to={`${url}/profile`}> Profile</Link>
-        </Menu.Item>
+        {DashboardRoutes
+          ? DashboardRoutes.map((route) => (
+              <Menu.Item key={route.id} icon={route.icon}>
+                <Link to={`${url}${route.url}`}>{route.name}</Link>
+              </Menu.Item>
+            ))
+          : null}
       </Menu>
     </Sider>
   );

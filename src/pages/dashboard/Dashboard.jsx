@@ -5,9 +5,8 @@ import { Layout } from 'antd';
 import Aside from './Aside';
 import NavBar from './NavBar';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import DashboardRoutes from '../../routes/DashboardRoutes';
 import Programs from './Program/Programs';
-import Cohorts from './Cohort/Cohorts';
-import Trainees from './Trainee/Trainees';
 
 const { Content } = Layout;
 
@@ -36,12 +35,13 @@ const Dashboard = () => {
               <Route exact path={path}>
                 <Programs />
               </Route>
-              <Route path={`${path}/cohorts`}>
-                <Cohorts />
-              </Route>
-              <Route path={`${path}/trainees`}>
-                <Trainees />
-              </Route>
+              {DashboardRoutes
+                ? DashboardRoutes.map((route) => (
+                    <Route path={`${path}${route.url}`} key={route.id}>
+                      {route.component}
+                    </Route>
+                  ))
+                : null}
             </Switch>
           </Content>
         </Layout>

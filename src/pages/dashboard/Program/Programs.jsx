@@ -83,19 +83,24 @@ const Programs = () => {
 
   const expandedRowRender = (row) => {
     const columns = [
-      { title: 'Date', dataIndex: 'date', key: 'date' },
       { title: 'Name', dataIndex: 'name', key: 'name' },
+      { title: 'Start Date', dataIndex: 'start_date', key: 'start_date' },
+      { title: 'End Date', dataIndex: 'end_date', key: 'end_date' },
       {
         title: 'Status',
-        key: 'state',
-        render: () => (
+        key: 'status',
+        render: (data) => (
           <span>
             <Badge status='success' />
-            Finished
+            {data.status}
           </span>
         ),
       },
-      { title: 'Upgrade Status', dataIndex: 'upgradeNum', key: 'upgradeNum' },
+      {
+        title: 'Trainees ',
+        dataIndex: 'trainee_count',
+        key: 'trainee_count',
+      },
       {
         title: 'Action',
         dataIndex: 'operation',
@@ -118,9 +123,11 @@ const Programs = () => {
     for (let j in row.cohort_programs) {
       data.push({
         key: row.key,
-        date: row.cohort_programs[j].start_date,
+        state_date: row.cohort_programs[j].start_date,
+        end_date: row.cohort_programs[j].end_date,
         name: `Cohort ${parseInt(j) + 1}`,
-        upgradeNum: 'Upgraded: 56',
+        trainee_count: '50',
+        status: row.cohort_programs[j].status,
       });
     }
     return <Table columns={columns} dataSource={data} pagination={false} />;

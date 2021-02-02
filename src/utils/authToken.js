@@ -1,12 +1,12 @@
 export const getStoredAuthToken = () => {
-  return JSON.parse(window.localStorage.getItem('authToken'));
-  // if (!auth) return null;
-  // const exp = getExpirationDate(auth.jwt);
-  // if (isExpired(exp)) {
-  //   removeStoredAuthToken();
-  // } else {
-  //   return auth;
-  // }
+  const auth = JSON.parse(window.localStorage.getItem('authToken'));
+  if (!auth) return null;
+  const exp = getExpirationDate(auth.jwt);
+  if (isExpired(exp)) {
+    removeStoredAuthToken();
+  } else {
+    return auth;
+  }
 };
 
 export const storeAuthToken = (token) => {
